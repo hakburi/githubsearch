@@ -6,14 +6,14 @@ let bundleName: String = "com.genithlabs"
 
 // TODO: share xcconfig 파일을 프로젝트 관리할 방법 강구!!
 let projectSettings = Settings(
-  debug: Configuration(xcconfig: Path("config/Project-Debug.xcconfig")),
-  release: Configuration(xcconfig: Path("config/Project-Release.xcconfig")),
+  debug: Configuration(xcconfig: Path("Configs/Project-Debug.xcconfig")),
+  release: Configuration(xcconfig: Path("Configs/Project-Release.xcconfig")),
   defaultSettings: .none
 )
 
 let targetSettings = Settings(
-  debug: Configuration(xcconfig: Path("config/GithubSearch-Debug.xcconfig")),
-  release: Configuration(xcconfig: Path("config/GithubSearch-Release.xcconfig")),
+  debug: Configuration(xcconfig: Path("Configs/GithubSearch-Debug.xcconfig")),
+  release: Configuration(xcconfig: Path("Configs/GithubSearch-Release.xcconfig")),
   defaultSettings: .none
 )
 
