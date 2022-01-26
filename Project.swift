@@ -33,5 +33,6 @@ let project = Project(
       dependencies: [],
       settings: targetSettings
     )
-  ]
+  ],
+  additionalFiles: ["Configs/**"]
 )
