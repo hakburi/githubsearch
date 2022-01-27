@@ -16,7 +16,7 @@ jobs:
       - name: Action Runner Info
         run: |
           echo "$(whoami)@$(scutil --get ComputerName)"
-          echo "OS Version: $(sw-vers -productVersion)"
+          echo "OS Version: $(sw_vers -productVersion)"
           echo "Ruby(rbenv): $(rbenv global)"
           echo "Ruby: $(ruby --version)"
           echo "$(bundle --version)"
