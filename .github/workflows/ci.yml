@@ -24,7 +24,7 @@ jobs:
           #echo "Carthage/Rome: $(rome --version)"
           echo "Tuist: $(tuist version)"
 
-      - uses: action/checkout@v2
+      - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
