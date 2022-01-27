@@ -17,10 +17,10 @@ jobs:
         run: |
           echo "$(whoami)@$(scutil --get ComputerName)"
           echo "OS Version: $(sw_vers -productVersion)"
-          echo "Ruby(rbenv): $(rbenv global)"
+          #echo "Ruby(rbenv): $(rbenv global)"
           echo "Ruby: $(ruby --version)"
           echo "$(bundle --version)"
           echo "Carthage: $(carthage version)"
-          echo "Carthage/Rome: $(rome --version)"
-          echo "Tuist: $(tuist --version)"
+          #echo "Carthage/Rome: $(rome --version)"
+          echo "Tuist: $(tuist version)"
   
