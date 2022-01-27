@@ -9,13 +9,11 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  test:
     runs-on: macos-latest
-
+    timeout-minutes: 120
     steps:
-    - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+      - name: Action Runner Info
+        run: |
+          echo "$(whoami)@$(scutil --get ComputerName)"
+  
