@@ -24,11 +24,10 @@ jobs:
           #echo "Carthage/Rome: $(rome --version)"
           echo "Tuist: $(tuist version)"
 
-      - name: Cache Ruby Dependencies
       - uses: action/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-      - run: bundle exec rake
+
           
