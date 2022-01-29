@@ -1,12 +1,15 @@
+// Development Assets
 //
-//  GithubSearch-Debug.xcconfig.xcconfig
-//  GithubSearch
-//
-//  Created by SungHak Jung on 2022/01/26.
-//  Copyright © 2022 GenithLabs. All rights reserved.
-//
+// Files and directories used only for development. Archive and install builds will
+// exclude this content.
 
-// Configuration settings file format documentation can be found at:
-// https://help.apple.com/xcode/#/dev745c5c974
+DEVELOPMENT_ASSET_PATHS = "Project/GithubSearch/Preview Content"
 
-#include "GithubSearch-Shared.xcconfig"
+
+
+// Enable Previews
+//
+// If enabled, the product will be built with options appropriate for supporting
+// previews.
+
+ENABLE_PREVIEWS = YES

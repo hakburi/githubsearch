@@ -461,3 +461,6 @@ MTL_FAST_MATH = YES
 // setting.
 
 SDKROOT = iphoneos
+
+
+SWIFT_VERSION = 5
