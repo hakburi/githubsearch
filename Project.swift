@@ -4,17 +4,17 @@ let projectName: String = "GithubSearch"
 let organizationName: String = "GenithLabs"
 let bundleName: String = "com.genithlabs"
 
-// TODO: share xcconfig 파일을 프로젝트 관리할 방법 강구!!
-let projectSettings = Settings(
-  debug: Configuration(xcconfig: Path("Configs/Project-Debug.xcconfig")),
-  release: Configuration(xcconfig: Path("Configs/Project-Release.xcconfig")),
-  defaultSettings: .none
+let projectSettings = Settings.settings(
+  configurations: [
+    .debug(name: "Debug", xcconfig: Path("Configs/Project-Debug.xcconfig")),
+    .release(name: "Release", xcconfig: Path("Configs/Project-Release.xcconfig"))
+  ]
 )
-
-let targetSettings = Settings(
-  debug: Configuration(xcconfig: Path("Configs/GithubSearch-Debug.xcconfig")),
-  release: Configuration(xcconfig: Path("Configs/GithubSearch-Release.xcconfig")),
-  defaultSettings: .none
+let targetSettings = Settings.settings(
+  configurations: [
+    .debug(name: "Debug", xcconfig: Path("Configs/GithubSearch-Debug.xcconfig")),
+    .release(name: "Release", xcconfig: Path("Configs/GithubSearch-Release.xcconfig"))
+  ]
 )
 
 let project = Project(
@@ -33,6 +33,5 @@ let project = Project(
       dependencies: [],
       settings: targetSettings
     )
-  ],
-  additionalFiles: ["Configs/**"]
+  ]
 )

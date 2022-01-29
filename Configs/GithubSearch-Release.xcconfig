@@ -1,12 +1,1 @@
-//
-//  GithubSearch-Release.xcconfig
-//  GithubSearch
-//
-//  Created by SungHak Jung on 2022/01/26.
-//  Copyright © 2022 GenithLabs. All rights reserved.
-//
 
-// Configuration settings file format documentation can be found at:
-// https://help.apple.com/xcode/#/dev745c5c974
-
-#include "GithubSearch-Shared.xcconfig"
