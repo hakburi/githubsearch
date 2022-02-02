@@ -32,6 +32,19 @@ let project = Project(
       resources: ["Project/\(projectName)/Resources/**"],
       dependencies: [],
       settings: targetSettings
+    ),
+    Target(
+      name: "UnitTests",
+      platform: .iOS,
+      product: .unitTests,
+      bundleId: "com.genithlabs.\(projectName)Tests",
+      infoPlist: .default,
+      sources: [
+        "Tests/**"
+      ],
+      dependencies: [
+        .target(name: projectName)
+      ]
     )
   ]
 )
