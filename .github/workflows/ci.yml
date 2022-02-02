@@ -44,3 +44,10 @@ jobs:
         with: 
           command: 'build'
           arguments: ''
+          
+      - name: Testing
+        run: | 
+            xcodebuild test \
+            -project GithubSearch.xcodeproj \
+            -scheme UnitTests \
+            -destination "platform=iOS Simulator,name=iPhone 13 Pro,OS=15.2"
