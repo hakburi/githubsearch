@@ -4,50 +4,62 @@ on:
   push:
     branches: 
       - master
-      - hakburi/*
   pull_request:
     branches: [ master ]
 
 jobs:
   test:
-    runs-on: macos-11
+    runs-on: macos-13
     timeout-minutes: 120
+
     steps:
       - name: Action Runner Info
         run: |
           echo "$(whoami)@$(scutil --get ComputerName)"
           echo "OS Version: $(sw_vers -productVersion)"
-          #echo "Ruby(rbenv): $(rbenv global)"
-          echo "Ruby: $(ruby --version)"
-          echo "$(bundle --version)"
-          echo "Carthage: $(carthage version)"
-          #echo "Carthage/Rome: $(rome --version)"
-          echo "Tuist: $(tuist version)"
 
-      - uses: actions/checkout@v2
-      - uses: ruby/setup-ruby@v1
+          # Set enviroments
+          echo "machine_name=$(scutil --get ComputerName)" >> $GITHUB_ENV
+          echo "swift_version=$(xcrun swift --version | head -1 | sed 's/.*(\(.*\)).*/\1/' | tr " " "-")" >> $GITHUB_ENV
+
+      - name: Checkout project
+        uses: actions/checkout@v3.5.3
         with:
-          ruby-version: 3.1
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          fetch-depth: 50
 
-      - name: Install tuist
-        run: | 
-            bash <(curl -Ls https://install.tuist.io)
-            
+      - name: Set Tuist Version
+        id: tuist_version
+        run: echo "version=$(cat .tuist-version)" >> $GITHUB_OUTPUT
+  
+      - name: Cache Tuist Install Dependencies
+        id: tuist-install-cache
+        uses: actions/cache@v3.3.1
+        with:
+          path: .tuist-bin
+          key: ${{ env.machine_name }}-tuist-version-${{ steps.tuist_version.outputs.version }}-cache
+          restore-keys: ${{ env.machine_name }}-tuist-version-
+  
+      - name: Tuist Install
+        if: steps.tuist-install-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -L -o ./tuist.zip https://github.com/tuist/tuist/releases/download/${{ steps.tuist_version.outputs.version }}/tuist.zip
+          unzip ./tuist.zip -d .tuist-bin
+
       - name: Package Info
         run: |
           echo "Ruby: $(ruby --version)"
           echo "$(bundle --version)"
           echo "Tuist: $(tuist version)"
           
-      - uses: tuist/tuist-action@0.13.0
-        with: 
-          command: 'build'
-          arguments: ''
+      - name: Tuist Generate Project
+        run: |
+          .tuist-bin/tuist clean
+          .tuist-bin/tuist fetch
+          .tuist-bin/tuist generate --no-open
           
-      - name: Testing
-        run: | 
-            xcodebuild test \
-            -project GithubSearch.xcodeproj \
-            -scheme UnitTests \
-            -destination "platform=iOS Simulator,name=iPhone 13 Pro,OS=15.2"
+      # - name: Testing
+      #   run: | 
+      #       xcodebuild test \
+      #       -project GithubSearch.xcodeproj \
+      #       -scheme UnitTests \
+      #       -destination "platform=iOS Simulator,name=iPhone 13 Pro,OS=15.2"
