@@ -1,6 +1,10 @@
 name: CI
 
 on:
+  push:
+    branches:
+      - hakburi/*
+
   pull_request:
     branches: [ master ]
 
@@ -53,6 +57,18 @@ jobs:
           .tuist-bin/tuist clean
           .tuist-bin/tuist fetch
           .tuist-bin/tuist generate --no-open
+
+      - name: Install SwiftLint
+        run: |
+          if ! command -v swiftlint &> /dev/null; then
+            echo "Installing SwiftLint..."
+            brew install swiftlint
+          else
+            echo "SwiftLint already installed."
+          fi          
+
+      - name: Run SwiftLint
+        run: swiftlint          
           
       # - name: Testing
       #   run: | 
